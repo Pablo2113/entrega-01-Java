@@ -105,4 +105,25 @@ public record fecha(Integer año, Integer mes, Integer dia) {
         String nombreMes = nombreMes();
 		return String.format("%s, %s de %s de %s", nombreDiaSemana, dia, nombreMes, año );
 	}
+	
+	//Defensa proyecto Java
+	//D
+	
+	public static fecha restarDiasFechaDada(fecha Fecha, int numDias) {
+        if (numDias <= 0 || numDias > 999) {
+            throw new IllegalArgumentException("El número de días debe ser positivo y tener como máximo 3 dígitos.");
+        }
+
+        int diasTotales = Fecha.dia() + (Fecha.mes() * 30) + (Fecha.año() * 365);
+
+        diasTotales -= numDias;
+
+        int nuevoAño = diasTotales / 365;
+        int resto = diasTotales % 365;
+        int nuevoMes = resto / 30;
+        int nuevoDia = resto % 30;
+
+        return new fecha(nuevoAño, nuevoMes, nuevoDia);
+    }
+	
 }

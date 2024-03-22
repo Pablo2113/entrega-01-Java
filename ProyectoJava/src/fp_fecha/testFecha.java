@@ -58,6 +58,12 @@ public class testFecha {
         System.out.println("\nFecha.diferenciaEnDias(fechaSumada): " + diferenciaEnDias);
         System.out.println("ChronoUnit.DAYS.between(localDate, localDateSumada): " + diferenciaEnDiasLocalDate);
 
-	
+        //Test fecha defensa Java
+        
+        fecha fechaInicial = new fecha(2024, 3, 22);
+        int diasARestar = 10;
+        fecha fechaResultado = fecha.restarDiasFechaDada(fechaInicial, diasARestar);
+        
+        System.out.println("Fecha defensa: " + fechaResultado);
 	}
 }

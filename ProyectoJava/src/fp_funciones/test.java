@@ -29,5 +29,12 @@ public class test {
 		System.out.println(funciones.encontrarCadenaMasLarga(listaCadena));
 		
 		
+		//Test defensa funciones
+		
+		System.out.println(funciones.funcionP2(5, 4));
+		
+		System.out.println(funciones.fucionC2(7, 4));
+		
+
 	}	
 }

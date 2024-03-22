@@ -71,6 +71,36 @@ public class funciones {
         return cadenaMasLarga;
     }
 	
+	//Defensa proyecto Java (funciones)
+	
+	//A
+	
+	public static int funcionP2(int n,int k) {
+		if(k>=n) {
+			throw new IllegalArgumentException("n debe ser mayor o igual a k");
+		}
+		int resultado = 1;
+		for(int i = 0; i <= k-2;i++) {
+			resultado = resultado * (n -i);
+		}
+		return resultado;
+	}
+	
+	//B
+	public static double fucionC2(int n, int k) {
+		if(n <= k) {
+			throw new IllegalArgumentException("n debe ser mayor  que k");
+		} else { 
+			return funciones.calcularFactorial(n)/(funciones.calcularFactorial(k +1)* 
+				   funciones.calcularFactorial(n -(k +1)));	
+		}
+	}
+	
+	
+	
+	
+	
+
 	
 }
 	
