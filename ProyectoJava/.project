@@ -3,6 +3,7 @@
 	<name>ProyectoJava</name>
 	<comment></comment>
 	<projects>
+		<project>java_v1</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
