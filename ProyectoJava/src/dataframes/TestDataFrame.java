@@ -1,6 +1,7 @@
-package fp_Dataframe;
+package dataframes;
 import java.util.List;
-import fp_Dataframe.DataFrameImpl;
+
+import dataframes.DataFrameImpl_de_ayuda;
 
 
 
@@ -8,7 +9,7 @@ public class TestDataFrame {
 	public static void main(String[] args ) {
 		
 		//Personas
-		DataFrame d = DataFrame.parse("personas.csv", List.of("Nombre","Apellido","Edad","Altura","Fecha"));
+		DataFrame d = DataFrame.parse("persona.csv", List.of("Nombre","Apellido","Edad","Altura","Fecha"));
 		System.out.println(d);
 	
 		 System.out.println("Las diez primeras filas:");
