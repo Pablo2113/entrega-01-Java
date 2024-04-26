@@ -16,12 +16,12 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import File2;
 import us.lsi.tools.File2;
 import us.lsi.tools.Preconditions;
 //import us.lsi.tools.Enumerate;
 //import us.lsi.tools.List2;
 //import us.lsi.tools.Stream2;
+import fp_Dataframe.DataFrame;
 
 public class DataFrameImpl implements DataFrame {
 	// --------------------
@@ -227,9 +227,6 @@ public class DataFrameImpl implements DataFrame {
 		// La programación es muy parecida al método anterior. Trata de reproducirla
 		// TODO </
 	}
-	
-//	public static Boolean allDifferent(String name) {
-//	}
 
 	@Override
 	public Boolean columAllDifferent(String name) {
@@ -439,9 +436,13 @@ public class DataFrameImpl implements DataFrame {
 				.toList();
 		return DataFrameImpl.of(columNames,columIndex,rn);
 	}
+	
+	
+   
 	// --------------------
 	// Métodos adicionales: redefinidos de Object
-	@Override
+	
+	        @Override
 	public String toString() {
 		//
 		Integer t = 13;

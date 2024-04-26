@@ -6,29 +6,29 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import dataframes.DataFrameImpll;
+import fp_Dataframe.DataFrameImpl;
 
 public interface DataFrame {
 	//
 	// Métodos estáticos o funcionalidades del tipo
 	public static DataFrame of(List<String> columNames,List<List<String>> rows) {  
-		return DataFrameImpll.of(columNames,rows);
+		return DataFrameImpl.of(columNames,rows);
 	}
 	//
 	public static DataFrame of(Map<String,List<String>> data) {
-		return DataFrameImpll.of(data);
+		return DataFrameImpl.of(data);
 	}
 	//
 	public static DataFrame of(Map<String,List<String>> data, List<String> columNames) {
-		return DataFrameImpll.of(data, columNames);
+		return DataFrameImpl.of(data, columNames);
 	}
 	//
 	public static DataFrame parse(String file) {
-		return DataFrameImpll.parse(file);
+		return DataFrameImpl.parse(file);
 	}
 	//
 	public static DataFrame parse(String file, List<String> columNames) {
-		return DataFrameImpll.parse(file, columNames);
+		return DataFrameImpl.parse(file, columNames);
 	}
 	//
 	public static DateTimeFormatter dateFormat() {
@@ -47,11 +47,11 @@ public interface DataFrame {
 	}
 	//
 	public static String string(Object r) {
-		return DataFrameImpll.string(r);
+		return DataFrameImpl.string(r);
 	}
 	//
 	public static <R> R parse(String text, Class<R> type) {
-		return DataFrameImpll.parse(text, type);
+		return DataFrameImpl.parse(text, type);
 	}
 	//
 	// Métodos imperativos o propiedades del tipo
