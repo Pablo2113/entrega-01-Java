@@ -1,4 +1,4 @@
-package dataframes;
+package fp_Dataframe;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -6,27 +6,29 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import dataframes.DataFrameImpll;
+
 public interface DataFrame {
 	//
 	// Métodos estáticos o funcionalidades del tipo
 	public static DataFrame of(List<String> columNames,List<List<String>> rows) {  
-		return DataFrameImpl_de_ayuda.of(columNames,rows);
+		return DataFrameImpll.of(columNames,rows);
 	}
 	//
 	public static DataFrame of(Map<String,List<String>> data) {
-		return DataFrameImpl_de_ayuda.of(data);
+		return DataFrameImpll.of(data);
 	}
 	//
 	public static DataFrame of(Map<String,List<String>> data, List<String> columNames) {
-		return DataFrameImpl_de_ayuda.of(data, columNames);
+		return DataFrameImpll.of(data, columNames);
 	}
 	//
 	public static DataFrame parse(String file) {
-		return DataFrameImpl_de_ayuda.parse(file);
+		return DataFrameImpll.parse(file);
 	}
 	//
 	public static DataFrame parse(String file, List<String> columNames) {
-		return DataFrameImpl_de_ayuda.parse(file, columNames);
+		return DataFrameImpll.parse(file, columNames);
 	}
 	//
 	public static DateTimeFormatter dateFormat() {
@@ -45,11 +47,11 @@ public interface DataFrame {
 	}
 	//
 	public static String string(Object r) {
-		return DataFrameImpl_de_ayuda.string(r);
+		return DataFrameImpll.string(r);
 	}
 	//
 	public static <R> R parse(String text, Class<R> type) {
-		return DataFrameImpl_de_ayuda.parse(text, type);
+		return DataFrameImpll.parse(text, type);
 	}
 	//
 	// Métodos imperativos o propiedades del tipo

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.function.BinaryOperator;
@@ -15,18 +16,15 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+import File2;
 import fp_Dataframe.DataFrame;
-import us.lsi.tools.Enumerate;
 import us.lsi.tools.File2;
-import us.lsi.tools.List2;
 import us.lsi.tools.Preconditions;
-import us.lsi.tools.Stream2;
-import java.util.ArrayList;
+//import us.lsi.tools.Enumerate;
+//import us.lsi.tools.List2;
+//import us.lsi.tools.Stream2;
 
-
-
-public class DataFrameImpl_de_ayuda implements DataFrame {
+public class DataFrameImpll implements DataFrame {
 	// --------------------
 	// Atributos
 	private List<String> columNames; // Nombres de las columnas
@@ -34,28 +32,40 @@ public class DataFrameImpl_de_ayuda implements DataFrame {
 	private List<List<String>> rows; // Lista de las filas
 	// --------------------
 	// Constructores
-	private DataFrameImpl_de_ayuda(List<String>columNames, Map<String, Integer> columIndex, List<List<String>> rows) {
+	private DataFrameImpll(List<String>columNames, Map<String, Integer> columIndex, List<List<String>> rows) {
 		this.columNames = new ArrayList<>(columNames);
         this.columIndex = new HashMap<>(columIndex);
         this.rows = new ArrayList<>(rows);
-
 		// Se inicializan los atributos, pero se asignan copias de los parámetros y no los parámetros en sí mismos
-		// TODO
+				// TODO </
 	}
 	// --------------------
 	// Métodos de factoría
-	private static DataFrameImpl_de_ayuda of(List<String> columNames,Map<String,Integer> columIndex,List<List<String>> rows) {
-		return new DataFrameImpl_de_ayuda(columNames, columIndex, rows);
+	private static DataFrameImpll of(List<String> columNames,Map<String,Integer> columIndex,List<List<String>> rows) {
+		return new DataFrameImpll(columNames, columIndex, rows);
+		// Se calcula a partir del constructor de manera directa
+		// TODO </
+	
 	}
-	public static DataFrameImpl_de_ayuda of(Map<String,List<String>> data) {
-		ist<String> columNames = new ArrayList<String>();
+	
+	//I
+	
+	public static DataFrameImpll of(Map<String,List<String>> data) {
+		List<String> columNames = new ArrayList<String>();
 		for(String e : data.keySet()) {
 			columNames.add(e);
 		}
 		return DataFrameImpll.of(data, columNames);
+ 
+            // Se deriva columNames a partir de data y se llama al método anterior
+		// TODO </
+		
 	}
-	public static DataFrameImpl_de_ayuda of(Map<String,List<String>> data, List<String> columNames) {
-Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
+	
+	//I
+	
+	public static DataFrameImpll of(Map<String,List<String>> data, List<String> columNames) {
+		Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 		
 		Preconditions.checkArgument(data.keySet().equals(columNamesSet),
 							"Columnas inexistentes, o alteradas en data o en columNames. ");
@@ -77,22 +87,32 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 			}
 			rows.add(row);
 		}
-		return DataFrameImpl_de_ayuda.of(columNames, columIndex, rows);
+		return DataFrameImpll.of(columNames, columIndex, rows);
 			
-    }
-	public static DataFrameImpl_de_ayuda parse(String file) {
+	}
+		//Se debe llamar al método DataFrameImpl.of(columNames,columIndex,rows)
+			//columNames y columIndex se calculan recorriendo el diccionario data
+			//No olvide comprobar que las claves de data deben coincidir con columNames
+			//TODO </
+
+    
+	public static DataFrameImpll parse(String file) {
 		Map<String, List<String>> data = File2.mapDeCsv(file);
-		return DataFrameImpl_de_ayuda.of(data);
+		return DataFrameImpll.of(data);
+		// Se utiliza el método mapDeCsv de File2 (ver la librería de referencia) y se llama a uno de los métodos anteriores
+		// TODO(Preguntar)
+		
     }
-	public static DataFrameImpl_de_ayuda parse(String file, List<String> columNames) {
+	public static DataFrameImpll parse(String file, List<String> columNames) {
 		Map<String, List<String>> data = File2.mapDeCsv(file);
-	    return  DataFrameImpl_de_ayuda.of(data, columNames);
+	    return  DataFrameImpll.of(data, columNames);
     }
-	public static DataFrameImpl_de_ayuda of(List<String> columNames, List<List<String>> rows) {
-		//
+	
+	public static DataFrameImpll of(List<String> columNames, List<List<String>> rows) {
+		
 		Map<String,Integer> columIndex = new HashMap<>();
 		IntStream.range(0,columNames.size()).forEach(i->columIndex.put(columNames.get(i),i));
-        return DataFrameImpl_de_ayuda.of(columNames,columIndex,rows);
+        return DataFrameImpll.of(columNames,columIndex,rows);
     }
 	// --------------------
 	// Métodos estáticos auxiliares: 
@@ -103,7 +123,7 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
         return n.equals(m);
     }
 	// Método auxiliar para la propiedad groupBy
-	public static String string(Object r) {
+	public static String string(Object r) {		
 		String s = null;
 		if(r instanceof LocalDate) {
 			LocalDate r1 = (LocalDate) r;
@@ -123,6 +143,25 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 		}
 		return s;
 	}
+	
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(columIndex, columNames, rows);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DataFrameImpll other = (DataFrameImpll) obj;
+		return Objects.equals(columIndex, other.columIndex) && Objects.equals(columNames, other.columNames)
+				&& Objects.equals(rows, other.rows);
+	}
+	
 	// Método de utilidad (no se llama en ningún otro método, se ofrece con el tipo)
 	@SuppressWarnings("unchecked")
 	public static <R> R parse(String text, Class<R> type) {
@@ -148,57 +187,64 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 	public List<String> columNames() {
 		return new ArrayList<>(this.columNames);
 		// Devuelve una copia del atributo correspondiente 
-		// TODO
+		// TODO</
+		
 	}
 	@Override
 	public Integer columNumber() {
 		return this.columNames.size();
 		// Se calcula a partir del atributo columNames
-		// TODO
+		// TODO </
 	}
 	@Override
 	public List<String> colum(String name) {
 		return this.rows.stream()
 	            .map(rows -> rows.get(this.columIndex.get(name)))
 	            .collect(Collectors.toList());
-	}
 		// Se calcula a partir del atributo columIndex
-		// TODO
-	
+		// TODO </
+	}
+	@Override
 	public List<String> colum(Integer index) {
 		return this.rows.stream()
 	            .map(rows -> rows.get(index))
 	            .collect(Collectors.toList());
-	}
 		// Se calcula a partir del atributo rows
-		// TODO
-		
+		// TODO </
+	}
 	@Override
 	public <R> List<R> colum(String name, Class<R> type){
 		return this.colum(name).stream().map(x->DataFrame.parse(x,type)).toList();
 	}
-	// ¿Podrías explicar qué significa Class<R> type) como parámetro de entrada? // Es un clase genérica la cual
-	
 	
 	@Override
     public <R> List<R> colum(Integer index, Class<R> type){
-		return this.colum(index).stream().map(x->DataFrame.parse(x,type)).toList();
-		
+		return this.colum(index.stream().map(x->DataFramw.parse(x, type)));
+				
+			
+				//.rows.stream()
+				//.map(row -> DataFrame.parse(row.get(index), type))
+				//.collect(Collectors.toList());
 		// La programación es muy parecida al método anterior. Trata de reproducirla
-		// TODO
-		
+		// TODO </
 	}
+	
+//	public static Boolean allDifferent(String name) {
+//	}
+
 	@Override
 	public Boolean columAllDifferent(String name) {
 		List<String> values = this.colum(name);
 	    return DataFrameImpll.allDifferent(values);
 		// Se calcula utilizando el método estático auxiliar allDifferent
-		// TODO
+		// TODO </
 	}
-	
 	@Override
 	public String propertie(List<String> row, String colum) {
 		return row.get(this.columIndex.get(colum));
+		// Se calcula a partir del atributo row utilizando las propiedades de los diccionarios
+		// TODO </
+		
 	}
 	@Override
 	public <R> R propertie(List<String> row, String colum, Class<R> type) {
@@ -209,24 +255,40 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 	@Override
 	public String cell(Integer row, String colum) {
 		return this.rows.get(row).get(this.columIndex.get(colum));
+		// Se calcula con los atributos rows y columIndex y los valores enteros dados como parámetros
+		// Es decir, se da una fila y una columna y se cruzan en una casilla en concreto
+		// TODO -/
+		
 	}
 	@Override
 	public String cell(Integer row, Integer colum) {
 		return this.rows.get(row).get(colum);
+		// Se calcula de manera muy parecida al método anterior
+		// TODO -/
+		
 	}
 	@Override
 	public String cell(String row,String colum, String propertie) {
 		int rowIndex = this.rows.indexOf(row);
 	    int columIndex = this.columNames.indexOf(colum);
 	    return this.rows.get(rowIndex).get(columIndex);
+		// Se calcula de manera muy parecida al método anterior
+		// TODO -/
+		
 	}
 	@Override
 	public Integer rowNumber() {
 		return this.rows.size();
+		// Se calcula a partir del atributo rows
+		// TODO -/
+		
 	}
 	@Override
 	public List<String> row(Integer i) {
 		return this.rows.get(i);
+		// Se calcula a partir del atributo rows
+		// TODO </
+		
 	}
 	@Override
 	public List<String> row(String row, String colum) {
@@ -237,6 +299,10 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 	            .filter(r -> r.get(this.columIndex.get(colum)).equals(row))
 	            .findFirst()
 	            .orElse(null);
+		// Debe comprobar que la columna no existe previamente en el Dataframe: 
+		// para ello realice un chequeo usando la utilidad allDifferent
+		// Se calcula a partir del atributo rows
+		// TODO -/
 	}
 	@Override
 	public List<List<String>> rows() {
@@ -246,6 +312,9 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 	@Override
 	public DataFrame head() {
 		return this.head(5);
+		// Se calcula a partir del método head: por defecto muestra cinco fillas
+		// TODO -/
+		
 	}
 	@Override
 	public DataFrame head(Integer n) {
@@ -254,7 +323,7 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 		List<String> columNames = new ArrayList<>(this.columNames);
 		Map<String,Integer> columIndex = new HashMap<>(this.columIndex);
 		List<List<String>> rows = new ArrayList<>(this.rows);
-		return DataFrameImpl_de_ayuda.of(columNames,columIndex,rows.subList(0, n));
+		return DataFrameImpll.of(columNames,columIndex,rows.subList(0, n));
 	}
 	@Override
 	public DataFrame tail() {
@@ -267,23 +336,33 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 	    Map<String,Integer> columIndex = new HashMap<>(this.columIndex);
 	    List<List<String>> rows = new ArrayList<>(this.rows);
 	    int totalRows = this.rows.size();
-	    return DataFrameImpl_de_ayuda.of(columNames, columIndex, rows.subList(totalRows - n, totalRows));
+	    return DataFrameImpll.of(columNames, columIndex, rows.subList(totalRows - n, totalRows));
+		// Análogo al método head
+		// TODO -/
+		
 	}
 	@Override
 	public DataFrame slice(Integer n, Integer m) {
 		List<String> columNames = new ArrayList<>(this.columNames);
 	    Map<String,Integer> columIndex = new HashMap<>(this.columIndex);
 	    List<List<String>> rows = new ArrayList<>(this.rows.subList(n, m));
-	    return DataFrameImpl_de_ayuda.of(columNames, columIndex, rows);
+	    return DataFrameImpll.of(columNames, columIndex, rows);
+	
+		// Análogo al método head
+		// TODO -/
+		
 	}
 	@Override
 	public DataFrame filter(Predicate<List<String>> p) {
-		List<String> columNames = new ArrayList<>(this.columNames);
-	    Map<String,Integer> columIndex = new HashMap<>(this.columIndex);
-	    List<List<String>> rows = this.rows.stream()
-	            .filter(p)
-	            .collect(Collectors.toList());
-	    return DataFrameImpl_de_ayuda.of(columNames, columIndex, rows);
+		 List<String> columNames = new ArrayList<>(this.columNames);
+		    Map<String,Integer> columIndex = new HashMap<>(this.columIndex);
+		    List<List<String>> rows = this.rows.stream()
+		            .filter(p)
+		            .collect(Collectors.toList());
+		    return DataFrameImpll.of(columNames, columIndex, rows);
+		// Se calcula de manera análoga al método head pero realizando un filtrado
+		// TODO -/
+		
 	}
 	@Override
 	public <E extends Comparable<? super E>> DataFrame sortBy(Function<List<String>, E> f, Boolean reverse) {
@@ -293,7 +372,7 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 		List<List<String>> rows = new ArrayList<>(this.rows);
 		Comparator<List<String>> cmp = reverse?Comparator.comparing(f).reversed():Comparator.comparing(f);
 		Collections.sort(rows,cmp);
-		return DataFrameImpl_de_ayuda.of(columNames,columIndex,rows);
+		return DataFrameImpll.of(columNames,columIndex,rows);
 	}
 	private Set<Integer> indexes(List<String> columNames){
 		//
@@ -313,7 +392,7 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 		Function<List<String>,List<String>> key = ls->this.select(ls,this.indexes(columNames));
 		Map<List<String>,R> g = Stream2.groupingReduce(this.rows.stream(),key,op,value);
 		DataFrame r = DataFrame.of(columNames,g.keySet().stream().toList());		
-		r = r.addColum(newColumn,g.values().stream().map(x->DataFrameImpl_de_ayuda.string(x)).toList());
+		r = r.addColum(newColumn,g.values().stream().map(x->DataFrameImpll.string(x)).toList());
 		return r;
 	}
 	@Override
@@ -328,7 +407,7 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 		List<List<String>> rn = IntStream.range(0, nr).boxed()
 				.map(r->List2.concat(rows.get(r),List.of(datos.get(r))))
 				.toList();
-		return DataFrameImpl_de_ayuda.of(columNames,columIndex,rn);
+		return DataFrameImpll.of(columNames,columIndex,rn);
 	}
 	@Override
 	public DataFrame addCalculatedColum(String newColum, Function<List<String>, String> f) {
@@ -343,7 +422,9 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 	    for (int i = 0; i < rows.size(); i++) {
 	        rows.get(i).add(calculatedValues.get(i));
 	    }
-	    return DataFrameImpl_de_ayuda.of(columNames, columIndex, rows);
+	    return DataFrameImpll.of(columNames, columIndex, rows);
+		// Se calcula a partir del método anterior obteniendo la columna a añadir a través del atributo row y el parámetro f
+		// TODO -/
 	}
 	@Override
 	public DataFrame removeColum(String colum) {
@@ -357,7 +438,7 @@ Set<String> columNamesSet = columNames.stream().collect(Collectors.toSet());
 		List<List<String>> rn = rows.stream()
 				.map(r->IntStream.range(0, this.columNumber()).boxed().filter(i->i != c).map(i->r.get(i)).toList())
 				.toList();
-		return DataFrameImpl_de_ayuda.of(columNames,columIndex,rn);
+		return DataFrameImpll.of(columNames,columIndex,rn);
 	}
 	// --------------------
 	// Métodos adicionales: redefinidos de Object
