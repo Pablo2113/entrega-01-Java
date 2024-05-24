@@ -18,6 +18,8 @@ public class testeo {
 		System.out.println(Questions.rangoDeIntereseDePrestamos(banco));
 		System.out.println("Numero de prestamos por mes año: ");
 		System.out.println(Questions.numPrestamosPorMesAño(banco));
+		
+		
 	
 	}
 
